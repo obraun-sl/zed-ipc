@@ -15,7 +15,7 @@ This uses Boost Interprocess library for IPC transfer.
 ## Requirements 
 - Linux (Ubuntu or JetsonL4T)
 - [ZED SDK](https://www.stereolabs.com/developers/) and its dependencies ([CUDA](https://developer.nvidia.com/cuda-downloads))
-- Boost library ('$sudo apt install libboost-all-dev')
+- Boost library (` $sudo apt install libboost-all-dev `)
 - OpenCV library
 
 
@@ -29,21 +29,22 @@ This uses Boost Interprocess library for IPC transfer.
 
 Open a terminal in the sample directory and execute the following command:
 
-- 'mkdir build && cd build' <br/>
-- 'cmake .. && make'
+- `mkdir build && cd build` <br/>
+- `cmake .. && make`<br/>
 
 This will build 2 samples "Producer" and "Consumer". Both are using the same class behind in a server or client configuration for easy integration
 
 ## Run the program
 
 Start Producer first : 
-'$ ./producer'
-
+`$ ./producer`
+<br/>
 
 Start consumer then : 
-'$ ./consumer'
+`$ ./consumer`
+<br/>
 
-Both programs will show the same left image of the ZED cameras. One is directly extracted from ZED SDK (producer), the other one is read from shared memory
+Both programs will show the same left image of the ZED cameras. One is directly extracted from ZED SDK (producer), the other one is read from shared memory (consumer)
 
 
 ## Notes
