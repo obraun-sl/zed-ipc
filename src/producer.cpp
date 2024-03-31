@@ -4,6 +4,7 @@
 
 //Shared memory handler include
 #include "sharedMemoryHandler.hpp"
+#include <opencv2/opencv.hpp>
 
 int main() {
 
@@ -26,7 +27,7 @@ int main() {
 
     sl::Mat zed_image;
 
-    shm::MatHanlder shmhandler;
+    shm::ShMatHandler shmhandler;
     shmhandler.createServer(DEFAULT_SHARED_NAME);
     unsigned char key = ' ';
     while (key!='q') {
@@ -38,7 +39,7 @@ int main() {
             // Convert sl::Mat to cv::Mat (share buffer)
             cv::Mat cvImage = cv::Mat((int) zed_image.getHeight(), (int) zed_image.getWidth(), CV_8UC4, zed_image.getPtr<sl::uchar1>(sl::MEM::CPU));
             // Send the mat to shared memory/ IPC
-            shmhandler.send(cvImage);
+            shmhandler.send(zed_image);
             cv::imshow("Original",cvImage);
             key = cv::waitKey(5);
         }
