@@ -2,7 +2,7 @@
 IPC transfer for ZED images 
 
 
-This repository shows how to transfer ZED images through OpenCV Mat to another process.</br>
+This repository shows how to transfer ZED images through sl::Mat (ZED SDK) to another process.</br>
 This uses Boost Interprocess library for IPC transfer. 
 
 
@@ -32,7 +32,9 @@ Open a terminal in the sample directory and execute the following command:
 - `mkdir build && cd build` <br/>
 - `cmake .. && make`<br/>
 
-This will build 2 samples "Producer" and "Consumer". Both are using the same class behind in a server or client configuration for easy integration
+This will build 2 samples "Producer" and "Consumer". 
+
+Both are using the same class behind in a server or client configuration for easy integration
 
 ## Run the program
 
@@ -50,4 +52,16 @@ Both programs will show the same left image of the ZED cameras. One is directly 
 ## Notes
 - Only tested with RGB images, but should work as-is for Floating points images as well (depth, etc...)<br/>
 - Support 1 producer and multiple consumers up to 4 (but can modified using the `MAX_CONSUMER` define) <br/>
+
+
+## Features Roadmap
+
+<b>v0.3.0</b> <br/>
+- Add function to get the available shared memory space/name
+- Add function to retrieve the version number
+- Check support in Docker
+- Benchmark and unit tests
+
+ 
+
 
