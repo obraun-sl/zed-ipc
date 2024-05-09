@@ -48,4 +48,6 @@ Both programs will show the same left image of the ZED cameras. One is directly 
 
 
 ## Notes
-- Only tested with RGB images, but should work as-is for Floating points images as well (depth, etc...)
+- Only tested with RGB images, but should work as-is for Floating points images as well (depth, etc...)<br/>
+- Support 1 producer and multiple consumers up to 4 (but can modified using the `MAX_CONSUMER` define) <br/>
+

@@ -67,10 +67,11 @@ SET(LINK_LIBRARIES
     ${OpenCV_LIBS})
     
     
-    
-add_executable(consumer include/sharedMemoryHandler.hpp src/consumer.cpp)
+FILE(GLOB_RECURSE HDR_FILES include/*.h*)
+
+add_executable(consumer ${HDR_FILES} src/consumer.cpp)
 target_link_libraries(consumer ${LINK_LIBRARIES})
 
-add_executable(producer include/sharedMemoryHandler.hpp src/producer.cpp)
+add_executable(producer ${HDR_FILES} src/producer.cpp)
 target_link_libraries(producer ${LINK_LIBRARIES})
  

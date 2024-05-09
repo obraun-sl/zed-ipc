@@ -27,9 +27,17 @@ inline cv::Mat slMat2cvMat(sl::Mat& input) {
     return cv::Mat(input.getHeight(), input.getWidth(), cv_type, input.getPtr<sl::uchar1>(sl::MEM::CPU));
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     shm::ShMatHandler shmhandler;
-    shmhandler.createClient(DEFAULT_SHARED_NAME);
+    bool res = shmhandler.createClient(DEFAULT_SHARED_NAME);
+    if (!res)
+    {
+        std::cout<<" Cannot Open Capture --"<<std::endl;
+        std::cout<<" Either the shared memory handler does not exist or the number of slot is already full"<<std::endl;
+        return 1;
+    }
+
+    std::cout<<" Consumer Acquisition SLOT : "<<shmhandler.getConsumerSlot()<<std::endl;
     sl::Mat mat;
     cv::Mat dMat;
     unsigned char key = ' ';
