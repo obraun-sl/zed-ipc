@@ -1,4 +1,4 @@
-# zed-ipc-cv
+# ZED - IPC comm
 IPC transfer for ZED images 
 
 
