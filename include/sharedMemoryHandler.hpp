@@ -11,13 +11,14 @@
 #include <sl/Camera.hpp>
 
 #define SMH_VERSION_MAJOR 0
-#define SMH_VERSION_MINOR 2
+#define SMH_VERSION_MINOR 3
 #define SMH_VERSION_PATCH 0
-
 
 #define DEFAULT_SHARED_NAME "default_data_handler"
 #define MAX_CONSUMER 4
+#define MAX_TIMEOUT_POP 1000 //in ms
 #define MAX_RING_BUFFER_CNT 2
+
 
 namespace shm
 {
@@ -54,7 +55,6 @@ namespace shm
             return dataSize() + size();
         }
     } MatHeader;
-
 
     class ShMatHandler
     {
@@ -145,7 +145,20 @@ namespace shm
                 }
 
                 memcpy( m.getPtr<unsigned char>(), v.data() + offset, header.dataSize());
+                last_rcv_ts = sl::getCurrentTimeStamp();
                 return true;
+            }
+            else
+            {
+                sl::Timestamp current_ts = sl::getCurrentTimeStamp();
+                //When timeout is reached (probably producer down), recreate every MAX_TIMEOUT_POP milliseconds the memory segment to reconnect.
+                //Once the producer is online again, the connection will happen in less than MAX_TIMEOUT_POP milliseconds
+                if (current_ts.getMilliseconds()-last_rcv_ts.getMilliseconds()>=MAX_TIMEOUT_POP)
+                {
+                    createClient(name);
+                    last_rcv_ts = sl::getCurrentTimeStamp();
+                }
+
             }
 
             return false;
@@ -156,6 +169,7 @@ namespace shm
             return recv_index;
         }
 
+
     private :
         shm::BufferQueue* queue[MAX_CONSUMER] = {nullptr};
         bip::managed_shared_memory segment;
@@ -163,8 +177,16 @@ namespace shm
         std::string name="";
         bool exist_=false;
         int recv_index = -1;
+        sl::Timestamp last_rcv_ts = 0;
 
     };
+
+    static void getVersion(int &major, int& minor, int& patch)
+    {
+        major = SMH_VERSION_MAJOR;
+        minor = SMH_VERSION_MINOR;
+        patch = SMH_VERSION_PATCH;
+    }
 }
 
 #endif // SHARED_MEMORY_RING_BUFFER_BASE_H 

@@ -56,7 +56,7 @@ Both programs will show the same left image of the ZED cameras. One is directly 
 
 ## Features Roadmap
 
-<b>v0.3.0</b> <br/>
+<b>v0.3</b> <br/>
 - Add function to get the available shared memory space/name
 - Add function to retrieve the version number
 - Check support in Docker
