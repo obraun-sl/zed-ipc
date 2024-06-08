@@ -8,6 +8,9 @@
 
 int main() {
 
+    int maj_v,min_v,patch_v;
+    shm::getVersion(maj_v,min_v,patch_v);
+    std::cout<<" SHM Version : "<<maj_v<<"."<<min_v<<"."<<patch_v<<std::endl;
 
     // Create a ZED Camera object
     sl::Camera zed;

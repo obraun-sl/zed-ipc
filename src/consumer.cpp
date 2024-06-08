@@ -28,6 +28,12 @@ inline cv::Mat slMat2cvMat(sl::Mat& input) {
 }
 
 int main(int argc, char *argv[]) {
+
+    int maj_v,min_v,patch_v;
+    shm::getVersion(maj_v,min_v,patch_v);
+    std::cout<<" SHM Version : "<<maj_v<<"."<<min_v<<"."<<patch_v<<std::endl;
+
+
     shm::ShMatHandler shmhandler;
     bool res = shmhandler.createClient(DEFAULT_SHARED_NAME);
     if (!res)
@@ -45,8 +51,8 @@ int main(int argc, char *argv[]) {
         if (shmhandler.recv(mat)) {
             dMat = slMat2cvMat(mat);
             cv::imshow("shared CV", dMat);
-            key = cv::waitKey(5);
         }
+        key = cv::waitKey(5);
         usleep(1000);
     }
 }
