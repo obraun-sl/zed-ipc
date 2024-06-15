@@ -12,7 +12,7 @@
 
 #define SMH_VERSION_MAJOR 0
 #define SMH_VERSION_MINOR 3
-#define SMH_VERSION_PATCH 0
+#define SMH_VERSION_PATCH 1
 
 #define DEFAULT_SHARED_NAME "default_data_handler"
 #define MAX_CONSUMER 4
