@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.4)
 
-project(ZED_IPC_CV)
+project(ZED_IPC)
 
 if(COMMAND cmake_policy)
         cmake_policy(SET CMP0003 OLD)
@@ -31,11 +31,8 @@ link_directories(${CUDA_LIBRARY_DIRS})
 
 add_definitions(-std=c++17 -O3)
 
-
-
 if(Boost_FOUND)
-	set(Boost_USE_STATIC_LIBS OFF) 
-	set(Boost_USE_MULTITHREADED ON)  
+    set(Boost_USE_MULTITHREADED ON)
     include_directories(${Boost_INCLUDE_DIRS}) 
 endif()
 

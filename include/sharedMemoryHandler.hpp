@@ -68,7 +68,11 @@ namespace shm
             name = name_;
             max_reserved_shared_size = (unsigned long long)reserved_size_Mb*1000000ULL;
             bip::shared_memory_object::remove(name.c_str());
-            segment =  bip::managed_shared_memory(bip::open_or_create, name.c_str(),max_reserved_shared_size);
+            boost::interprocess::permissions  unrestricted_permissions;
+            unrestricted_permissions.set_unrestricted();
+            segment =  bip::managed_shared_memory(bip::open_or_create, name.c_str(),max_reserved_shared_size,0,unrestricted_permissions);
+
+
             for (int i=0;i<MAX_CONSUMER;i++)
             {
                 std::string queue_name = std::string("queue_")+std::to_string(i);
