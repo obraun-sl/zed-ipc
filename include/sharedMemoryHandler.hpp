@@ -12,7 +12,7 @@
 
 #define SMH_VERSION_MAJOR 0
 #define SMH_VERSION_MINOR 3
-#define SMH_VERSION_PATCH 1
+#define SMH_VERSION_PATCH 2
 
 #define DEFAULT_SHARED_NAME "default_data_handler"
 #define MAX_CONSUMER 4
@@ -61,7 +61,7 @@ namespace shm
     public :
 
         ShMatHandler() {}
-        ~ShMatHandler() {if (exist_) bip::shared_memory_object::remove(name.c_str());}
+        ~ShMatHandler() {if (is_server_ && exist_) bip::shared_memory_object::remove(name.c_str());}
 
         void createServer(std::string name_,int reserved_size_Mb=128)
         {
@@ -79,12 +79,13 @@ namespace shm
                 queue[i] = segment.find_or_construct<shm::BufferQueue>(queue_name.c_str())();
             }
             exist_=true;
+            is_server_=true;
         }
 
         bool createClient(std::string name_)
         {
             name = name_;
-
+            is_server_=false;
             // Find empty slot in generated ring buffers
             // To do that, we trick since the SPSC does not provide this information.
             // --> Read the number of available data in queue using read_available.
@@ -180,6 +181,7 @@ namespace shm
         unsigned long long max_reserved_shared_size = 64000000ULL;
         std::string name="";
         bool exist_=false;
+        bool is_server_ = false;
         int recv_index = -1;
         sl::Timestamp last_rcv_ts = 0;
 

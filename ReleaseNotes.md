@@ -1,5 +1,11 @@
 ## Release Notes
 
+##### v0.3.2
+- Fix client unconnect/connect
+
+##### v0.3.1 (June2024)
+- Add unrestricted permission to enable sudo/user comm
+
 ##### v0.3.0 (June2024)
 - Add function to retrieve version number (not really necessary as single header, but for convenience and future lib)
 - Add automatic recovery in client/consumer when server/producer is off and on again.

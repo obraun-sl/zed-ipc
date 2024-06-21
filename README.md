@@ -15,7 +15,7 @@ This uses Boost Interprocess library for IPC transfer.
 ## Requirements 
 - Linux (Ubuntu or JetsonL4T)
 - [ZED SDK](https://www.stereolabs.com/developers/) and its dependencies ([CUDA](https://developer.nvidia.com/cuda-downloads))
-- Boost library (` $sudo apt install libboost-all-dev `)
+- Boost library (` $sudo apt install libboost-all-dev`)
 - OpenCV library
 
 
